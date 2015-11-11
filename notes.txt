@@ -1,0 +1,110 @@
+dowload git from git-scm.com and install it
+apply account in github.com
+apply free account in pythonanywhere.com
+
+install python3.4 64bit version on windows
+
+C:\xxd\learn\djangogirls>python --version
+Python 3.4.3
+
+C:\xxd\learn\djangogirls>python -m venv myvenv
+C:\xxd\learn\djangogirls>dir
+ Volume in drive C has no label.
+ Volume Serial Number is B0B2-5AD6
+
+ Directory of C:\xxd\learn\djangogirls
+
+11/11/2015  08:42 AM    <DIR>          .
+11/11/2015  08:42 AM    <DIR>          ..
+11/11/2015  08:42 AM    <DIR>          myvenv
+               0 File(s)              0 bytes
+               3 Dir(s)  334,084,546,560 bytes free
+
+C:\xxd\learn\djangogirls>myvenv\scripts\activate
+(myvenv) C:\xxd\learn\djangogirls>pip install django==1.8
+
+(myvenv) C:\xxd\learn\djangogirls>django-admin startproject mysite .
+
+(myvenv) C:\xxd\learn\djangogirls>dir
+ Volume in drive C has no label.
+ Volume Serial Number is B0B2-5AD6
+
+ Directory of C:\xxd\learn\djangogirls
+
+11/11/2015  09:08 AM    <DIR>          .
+11/11/2015  09:08 AM    <DIR>          ..
+11/11/2015  09:08 AM               249 manage.py
+11/11/2015  09:08 AM    <DIR>          mysite
+11/11/2015  08:45 AM    <DIR>          myvenv
+11/11/2015  09:06 AM               770 notes.txt
+
+change mysite/settings.py
+add:
+STATIC_ROOT=os.path.join(BASE_DIR,'static')
+TIME_ZONE='EST'
+
+setup database
+(myvenv) C:\xxd\learn\djangogirls>python manage.py migrate
+
+run server
+(myvenv) C:\xxd\learn\djangogirls>python manage.py runserver
+
+C:\Python34\;C:\Python34\Scripts;C:\senchacmd\Sencha\Cmd\3.1.1.274;C:\dl\ruby193\bin;
+C:\Program Files\Broadcom\Broadcom 802.11\Driver;;C:\Program Files (x86)\AMD APP\bin\x86_64;
+C:\Program Files (x86)\AMD APP\bin\x86;C:\Program Files\Common Files\Microsoft Shared\Windows Live;
+C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;%SystemRoot%\system32;%SystemRoot%;
+%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;
+C:\Program Files (x86)\Common Files\Roxio Shared\DLLShared\;
+C:\Program Files (x86)\Common Files\Roxio Shared\DLLShared\;
+C:\Program Files (x86)\Common Files\Roxio Shared\12.0\DLLShared\;
+C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;
+C:\Program Files\WIDCOMM\Bluetooth Software\;C:\Program Files\WIDCOMM\Bluetooth Software\syswow64;
+C:\Program Files\Broadcom\WHL\;C:\Program Files\Broadcom\WHL\syswow64;C:\Program Files\Broadcom\WHL\SysWow64\;
+C:\Program Files\Broadcom\WHL\SysWow64\syswow64;C:\Program Files\SASHome\Secure;C:\Program Files\SASHome\x86\Secure;
+c:\jdk1.7.0_05\bin;C:\Program Files (x86)\QuickTime\QTSystem\;c:\Python27\;
+C:\Program Files (x86)\Dell Printers\OpenManage\OMPMv2.0\tools;
+C:\Program Files (x86)\Dell Printers\OpenManage\OMPMv2.0\client;C:\Program Files (x86)\\PostgreSQL\8.4\bin;
+C:\Program Files\Java\jre7\bin;C:\HashiCorp\Vagrant\bin
+
+
+(myvenv) C:\xxd\learn\djangogirls>python manage.py startapp blog
+
+(myvenv) C:\xxd\learn\djangogirls>dir
+ Volume in drive C has no label.
+ Volume Serial Number is B0B2-5AD6
+
+ Directory of C:\xxd\learn\djangogirls
+
+11/11/2015  10:06 AM    <DIR>          .
+11/11/2015  10:06 AM    <DIR>          ..
+11/11/2015  10:06 AM    <DIR>          blog
+11/11/2015  09:19 AM            36,864 db.sqlite3
+11/11/2015  09:08 AM               249 manage.py
+11/11/2015  09:19 AM    <DIR>          mysite
+11/11/2015  08:45 AM    <DIR>          myvenv
+11/11/2015  10:05 AM             2,915 notes.txt
+
+add blog in the mysite/settings.py INSTALLED_APPS section
+define Post class in blog/models.py
+
+(myvenv) C:\xxd\learn\djangogirls>python manage.py makemigrations blog
+Migrations for 'blog':
+  0001_initial.py:
+    - Create model Post
+
+(myvenv) C:\xxd\learn\djangogirls>python manage.py migrate blog
+Operations to perform:
+  Apply all migrations: blog
+Running migrations:
+  Rendering model states... DONE
+  Applying blog.0001_initial... OK
+  
+register Post in blog/admin.py
+
+(myvenv) C:\xxd\learn\djangogirls>python manage.py createsuperuser
+Username (leave blank to use 'xxdxxd'):xxdxxd
+Email address: xiaxdus@gmail.com
+Password:xxdyhq
+Password (again):xxdyhq
+Superuser created successfully.
+
