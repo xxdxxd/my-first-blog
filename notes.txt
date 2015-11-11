@@ -108,3 +108,131 @@ Password:xxdyhq
 Password (again):xxdyhq
 Superuser created successfully.
 
+C:\xxd\learn\djangogirls>git init
+Initialized empty Git repository in C:/xxd/learn/djangogirls/.git/
+
+C:\xxd\learn\djangogirls>git config --global user.name "xxdxxd"
+
+C:\xxd\learn\djangogirls>git config --global user.email xiaxdus@gmail.com
+C:\xxd\learn\djangogirls>git status
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        .gitignore
+        blog/
+        manage.py
+        mysite/
+        notes.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+C:\xxd\learn\djangogirls>git add -A .
+C:\xxd\learn\djangogirls>git commit -m "My Django app, first commit"
+create a new repository in github called my-first-blog
+https://github.com/xxdxxd/my-first-blog.git
+C:\xxd\learn\djangogirls>git remote add origin https://github.com/xxdxxd/my-firs
+t-blog.git
+
+C:\xxd\learn\djangogirls>git push -u origin master
+Now code is uploaded to github, next we will pull it down to pythonanywhere to deploy it.
+
+start a bash console in pythonanywhere
+15:37 ~ $ pwd
+/home/davexia
+15:37 ~ $ git clone https://github.com/xxdxxd/my-first-blog.git
+Cloning into 'my-first-blog'...
+remote: Counting objects: 17, done.
+remote: Compressing objects: 100% (16/16), done.
+remote: Total 17 (delta 0), reused 17 (delta 0), pack-reused 0
+Unpacking objects: 100% (17/17), done.
+Checking connectivity... done.
+
+15:38 ~ $ tree my-first-blog
+my-first-blog
++-- blog
+¦   +-- __init__.py
+¦   +-- admin.py
+¦   +-- migrations
+¦   ¦   +-- 0001_initial.py
+¦   ¦   +-- __init__.py
+¦   +-- models.py
+¦   +-- tests.py
+¦   +-- views.py
++-- manage.py
++-- mysite
+¦   +-- __init__.py
+¦   +-- settings.py
+¦   +-- urls.py
+¦   +-- wsgi.py
++-- notes.txt
+3 directories, 13 files
+15:38 ~ $ ls
+README.txt  my-first-blog
+15:39 ~ $ cd my-first-blog/
+15:39 ~/my-first-blog (master)$ ls
+blog  manage.py  mysite  notes.txt
+15:40 ~/my-first-blog (master)$ virtualenv --python=python3.4 myvenv                                                                                
+Running virtualenv with interpreter /usr/bin/python3.4
+Using base prefix '/usr'
+New python executable in myvenv/bin/python3.4
+Also creating executable in myvenv/bin/python
+Installing setuptools, pip, wheel...done.
+15:40 ~/my-first-blog (master)$ source myvenv/bin/activate
+(myvenv)15:41 ~/my-first-blog (master)$ pip install django whitenoise
+(myvenv)15:45 ~/my-first-blog (master)$ python manage.py collectstatic
+Copying '/home/davexia/my-first-blog/myvenv/lib/python3.4/site-packages/django/contrib/admin/static/admin/css/forms.css'
+Copying '/home/davexia/my-first-blog/myvenv/lib/python3.4/site-packages/django/contrib/admin/static/admin/css/ie.css'
+Copying '/home/davexia/my-first-blog/myvenv/lib/python3.4/site-packages/django/contrib/admin/static/admin/css/rtl.css'
+Copying '/home/davexia/my-first-blog/myvenv/lib/python3.4/site-packages/django/contrib/admin/static/admin/css/login.css'
+Copying '/home/davexia/my-first-blog/myvenv/lib/python3.4/site-packages/django/contrib/admin/static/admin/css/widgets.css'
+Copying '/home/davexia/my-first-blog/myvenv/lib/python3.4/site-packages/django/contrib/admin/static/admin/css/changelists.css'
+Copying '/home/davexia/my-first-blog/myvenv/lib/python3.4/site-packages/django/contrib/admin/static/admin/css/base.css'
+62 static files copied to '/home/davexia/my-first-blog/static'
+
+(myvenv)15:48 ~/my-first-blog (master)$ python manage.py migrate
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, messages
+  Apply all migrations: auth, admin, blog, sessions, contenttypes
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying blog.0001_initial... OK
+  Applying sessions.0001_initial... OK
+
+(myvenv)15:49 ~/my-first-blog (master)$ python manage.py createsuperuser
+Username (leave blank to use 'davexia'): davexia
+Email address: xiaxdus@gmail.com
+Password: yhq7236
+Password (again): yhq7236
+Superuser created successfully.
+
+pythonanywhere logo->web->add a new web app->Manual configuration->python3.4->Virtualenv
+/home/davexia/my-first-blog/myvenv
+In code section on the same web page: click to edit the wsgi file,then save the file
+in Web tab, click reload, open url http://davexia.pythonanywhere.com/ in the web browser, it is now alive!
+
+change mysite/urls.py to include blog.urls: url(r'',include('blog.urls')),
+create blog/urls.py to add urlpatterns: url(r'^$',views.post_list,name='post_list'),
+edit blog/views.py to add:
+def post_list(request):
+   return render(request,'blog/post_list.html',{})
+C:\xxd\learn\djangogirls\blog>mkdir templates
+
+C:\xxd\learn\djangogirls\blog>cd templates
+
+C:\xxd\learn\djangogirls\blog\templates>mkdir blog
