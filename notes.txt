@@ -236,3 +236,46 @@ C:\xxd\learn\djangogirls\blog>mkdir templates
 C:\xxd\learn\djangogirls\blog>cd templates
 
 C:\xxd\learn\djangogirls\blog\templates>mkdir blog
+create post_list.html
+C:\xxd\learn\djangogirls>git status
+C:\xxd\learn\djangogirls>git add -A .
+C:\xxd\learn\djangogirls>git status
+C:\xxd\learn\djangogirls>git commit -m "changed the html for the site"
+C:\xxd\learn\djangogirls>git push
+
+in pythonanywhere, we need to pull the latest changes from github:
+use bash console,
+(myvenv)15:50 ~/my-first-blog (master)$ git pull
+(myvenv)16:19 ~/my-first-blog (master)$ python manage.py collectstatic
+
+C:\xxd\learn\djangogirls>myvenv\scripts\activate
+(myvenv) C:\xxd\learn\djangogirls>python manage.py shell
+>>> from blog.models import Post
+>>> Post.objects.all()
+[]
+>>> from django.contrib.auth.models import User
+>>> User.objects.all()
+[<User: xxdxxd>]
+>>> me=User.objects.get(username='xxdxxd')
+>>> Post.objects.create(author=me,title='Sample title',text='Test')
+<Post: Sample title>
+>>> Post.objects.create(author=me,title='Sample title2',text='Test2')
+<Post: Sample title2>
+>>> Post.objects.create(author=me,title='Sample title3',text='Test3')
+<Post: Sample title3>
+>>> Post.objects.filter(author=me)
+[<Post: Sample title>, <Post: Sample title2>, <Post: Sample title3>]
+>>> Post.objects.filter(title__contains='title2')
+[<Post: Sample title2>]
+>>> post=Post.objects.get(title='Sample title')
+>>> post.publish()
+>>> from django.utils import timezone
+>>> Post.objects.filter(published_date__lte=timezone.now())
+[<Post: Sample title>]
+>>> Post.objects.order_by('created_date')
+[<Post: Sample title>, <Post: Sample title2>, <Post: Sample title3>]
+>>> Post.objects.order_by('-created_date')
+[<Post: Sample title3>, <Post: Sample title2>, <Post: Sample title>]
+>>> Post.objects.filter(published_date__lte=timezone.now()).order_by('published_
+date')
+[<Post: Sample title>]
